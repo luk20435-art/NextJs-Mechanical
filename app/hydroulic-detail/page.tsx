@@ -2,19 +2,58 @@
 
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-import { useRouter } from "next/navigation";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { CheckCircle } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation"; 
+import { Button } from "@/components/ui/button"; 
 import { Cog } from "lucide-react";
 import Link from "next/link";
+
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 
 
 export default function MachineDetailPage() {
   const router = useRouter();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  useEffect(() => {
+    AOS.init({ once: true })
+  }, [])
+
+  const topics = [
+    {
+      title: 'ปั๊มไฮดรอลิก',
+      description: 'ปั๊มเป็นแหล่งต้นกำลัง ทำหน้าที่สร้างแรงดันของเหลวเข้าสู่ระบบ',
+      image: '/images/pumps.jpg',
+    },
+    {
+      title: 'กระบอกสูบ (Cylinder)',
+      description: 'แปลงพลังงานของเหลวให้เป็นพลังงานกล เพื่อขับเคลื่อนโหลด',
+      image: '/images/cylinder.jpg',
+    },
+    {
+      title: 'วาล์วควบคุม',
+      description: 'ใช้ควบคุมทิศทาง ความดัน และปริมาณการไหลของของเหลว',
+      image: '/images/valve.jpg',
+    },
+  ]
+
+  const [pressure, setPressure] = useState<number | ''>('')
+  const [area, setArea] = useState<number | ''>('')
+  const [force, setForce] = useState<number | null>(null)
+
+  useEffect(() => {
+    AOS.init({ once: true })
+  }, [])
+
+  useEffect(() => {
+    if (pressure !== '' && area !== '') {
+      setForce(Number(pressure) * Number(area))
+    } else {
+      setForce(null)
+    }
+  }, [pressure, area])
 
   return (
     <div>
@@ -47,8 +86,99 @@ export default function MachineDetailPage() {
                     </div> 
                 </nav>
             </div>
-        </header>
-        <section className="py-20 px-6 bg-white min-h-screen" ref={ref}>
+        </header> 
+
+        <section className="max-w-7xl mx-auto px-4 py-16">
+            <div data-aos="fade-up" className="text-center mb-12">
+                <h2 className="text-3xl font-bold text-sky-800 mb-4">🔧 ระบบไฮดรอลิก (Hydraulic Systems)</h2>
+                <p className="text-gray-600 text-lg max-w-3xl mx-auto">
+                ระบบส่งกำลังด้วยของเหลวแรงดันสูง ใช้ในงานอุตสาหกรรมที่ต้องการแรงสูงและการควบคุมที่แม่นยำ เช่น เครื่องฉีด, เครื่องอัด, และเครื่องจักรก่อสร้าง
+                </p>
+            </div>
+
+            <div className="grid gap-8 md:grid-cols-3">
+                {topics.map((topic, index) => (
+                <div
+                    key={index}
+                    data-aos="zoom-in"
+                    data-aos-delay={index * 100}
+                    className="bg-white rounded-xl shadow hover:shadow-lg transition p-4"
+                >
+                    <Image
+                    src={topic.image}
+                    alt={topic.title}
+                    width={400}
+                    height={240}
+                    className="w-full h-52 object-cover rounded-lg mb-4"
+                    />
+                    <h3 className="text-xl font-semibold text-sky-700 mb-2">{topic.title}</h3>
+                    <p className="text-gray-600 text-sm">{topic.description}</p>
+                </div>
+                ))}
+            </div>
+        </section>
+
+        <section className="max-w-4xl mx-auto px-4 py-16">
+            <h2 data-aos="fade-up" className="text-2xl font-bold text-sky-800 mb-6 text-center">
+                🔧 คำนวณแรงในระบบไฮดรอลิก
+            </h2>
+
+            <div data-aos="zoom-in" className="bg-white p-6 rounded-xl shadow-md space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label className="block font-medium text-gray-700 mb-1">แรงดัน (Pressure) – หน่วย: Bar</label>
+                    <input
+                    type="number"
+                    value={pressure}
+                    onChange={(e) => setPressure(e.target.value === '' ? '' : parseFloat(e.target.value))}
+                    className="w-full p-2 border rounded-md focus:ring-2 focus:ring-sky-500"
+                    placeholder="เช่น 100"
+                    />
+                </div>
+                <div>
+                    <label className="block font-medium text-gray-700 mb-1">พื้นที่ (Area) – หน่วย: cm²</label>
+                    <input
+                    type="number"
+                    value={area}
+                    onChange={(e) => setArea(e.target.value === '' ? '' : parseFloat(e.target.value))}
+                    className="w-full p-2 border rounded-md focus:ring-2 focus:ring-sky-500"
+                    placeholder="เช่น 50"
+                    />
+                </div>
+                </div>
+
+                <div className="text-center mt-6">
+                {force !== null ? (
+                    <div className="text-xl font-semibold text-green-700">
+                    ✅ แรงที่ได้: <span className="text-2xl">{(force * 10).toFixed(2)}</span> N
+                    </div>
+                ) : (
+                    <p className="text-gray-500">กรอกข้อมูลเพื่อคำนวณแรง (F = P × A × 10)</p>
+                )}
+                </div>
+            </div>
+
+            {/* 💧 Animation การไหลของของเหลว */}
+            <div className="mt-16" data-aos="fade-up">
+                <h3 className="text-xl font-bold text-sky-800 text-center mb-6">💧 การไหลของของเหลวในท่อ</h3>
+                <div className="relative w-full h-40 bg-blue-100 rounded-lg overflow-hidden">
+                <div className="absolute top-1/2 left-0 w-full h-4 -translate-y-1/2 flex">
+                    {[...Array(10)].map((_, i) => (
+                    <div
+                        key={i}
+                        className="w-4 h-4 bg-blue-500 rounded-full animate-pulse"
+                        style={{
+                        animationDelay: `${i * 0.2}s`,
+                        animationDuration: '2s',
+                        animationIterationCount: 'infinite',
+                        marginRight: '8px',
+                        }}
+                    />
+                    ))}
+                </div>
+                </div>
+            </div>
+        </section>
             
         {/* 🔙 ปุ่มย้อนกลับ */}
         <div className="max-w-6xl mx-auto mb-6">
@@ -57,74 +187,7 @@ export default function MachineDetailPage() {
             </Button>
         </div>
 
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-            {/* 🖼️ รูปภาพ */}
-            <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            >
-            <Image
-                src="/images/gear.jpg"
-                alt="Gears"
-                width={500}
-                height={500}
-                className="rounded-lg mx-auto"
-            />
-            </motion.div>
-
-            {/* ✨ ข้อมูลรายละเอียด */}
-            <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="space-y-6"
-            >
-            <h2 className="text-4xl font-bold text-purple-700">เครื่องจักรกลการผลิต</h2>
-            <p className="text-gray-600 text-lg">
-                รายละเอียดเกี่ยวกับเครื่องกลึง เครื่องมิลลิ่ง และ CNC
-            </p>
-
-            {/* 🔧 ประเภทเครื่องจักร */}
-            <div>
-                <h3 className="text-2xl font-semibold text-gray-800 mb-2">ประเภทเครื่องจักร:</h3>
-                <ul className="space-y-1 text-gray-700">
-                <li className="flex items-center">
-                    <CheckCircle className="text-green-600 w-5 h-5 mr-2" />
-                    เครื่องกลึงความเร็วสูง
-                </li>
-                <li className="flex items-center">
-                    <CheckCircle className="text-green-600 w-5 h-5 mr-2" />
-                    เครื่องมิลลิ่งควบคุมด้วยคอมพิวเตอร์
-                </li>
-                <li className="flex items-center">
-                    <CheckCircle className="text-green-600 w-5 h-5 mr-2" />
-                    เครื่อง CNC แบบ 3 แกน
-                </li>
-                </ul>
-            </div>
-
-            {/* 🌟 ฟีเจอร์หลัก */}
-            <div>
-                <h3 className="text-2xl font-semibold text-gray-800 mb-2">ฟีเจอร์หลัก:</h3>
-                <ul className="space-y-1 text-gray-700">
-                <li className="flex items-center">
-                    <CheckCircle className="text-green-600 w-5 h-5 mr-2" />
-                    ความแม่นยำสูงระดับไมครอน
-                </li>
-                <li className="flex items-center">
-                    <CheckCircle className="text-green-600 w-5 h-5 mr-2" />
-                    รองรับวัสดุหลายประเภท เช่น โลหะ พลาสติก
-                </li>
-                <li className="flex items-center">
-                    <CheckCircle className="text-green-600 w-5 h-5 mr-2" />
-                    มีระบบควบคุมอัตโนมัติผ่านหน้าจอสัมผัส
-                </li>
-                </ul>
-            </div>
-            </motion.div>
-        </div>
-        </section>
+       
         {/* 👉 Footer */}
         <footer className="bg-gray-900 text-white py-12 mt-20">
         <div className="container mx-auto px-4">

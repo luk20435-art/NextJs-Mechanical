@@ -50,13 +50,7 @@ export default function MachineDetailPage() {
         </header>
 
         <section className="py-20 px-6 bg-white min-h-screen" ref={ref}>
-            
-        {/* 🔙 ปุ่มย้อนกลับ */}
-        <div className="max-w-6xl mx-auto mb-6">
-            <Button variant="outline" onClick={() => router.back()}>
-            ⬅️ ย้อนกลับ
-            </Button>
-        </div>
+        
 
         <div className="bg-white text-white py-10 px-4">
             <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8">
@@ -73,13 +67,13 @@ export default function MachineDetailPage() {
                     <h2 className="text-green-400 text-2xl font-semibold mb-3">
                      เครื่องยนต์สันดาปภายใน (Internal Combustion Engine - ICE)
                     </h2>
-                    <p className="text-zinc-400 text-sm leading-relaxed">
+                    <p className="text-zinc-400 text-sm leading-relaxed"></p>
                         <p><span>1. เครื่องยนต์เบนซิน (Gasoline Engine) – จุดระเบิดด้วยหัวเทียน</span></p>
                         <p><span>2. เครื่องยนต์ดีเซล (Diesel Engine) – จุดระเบิดด้วยความดัน</span></p>
                         <p><span>3. เครื่องยนต์แก๊สธรรมชาติ (NGV / LPG Engine)</span></p>
                         <p><span>4. เครื่องยนต์โรตารี (Rotary Engine) – เช่นเครื่องยนต์ Wankel</span></p>
                         <p><span>5. เครื่องยนต์สองจังหวะ / สี่จังหวะ – พบในจักรยานยนต์, เครื่องตัดหญ้า </span></p>
-                    </p>
+                    
                 </div>
                 </div>
 
@@ -156,6 +150,14 @@ export default function MachineDetailPage() {
             </div>
         </div>
         </section>
+
+        {/* 🔙 ปุ่มย้อนกลับ */}
+        <div className="max-w-6xl mx-auto mb-6">
+            <Button variant="outline" onClick={() => router.back()}>
+            ⬅️ ย้อนกลับ
+            </Button>
+        </div>
+        
         {/* 👉 Footer */}
         <footer className="bg-gray-900 text-white py-12 mt-20">
         <div className="container mx-auto px-4">

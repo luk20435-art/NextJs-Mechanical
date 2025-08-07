@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -15,6 +15,22 @@ export default function MachineDetailPage() {
   const router = useRouter();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const [pressure, setPressure] = useState('')
+  const [flowRate, setFlowRate] = useState('')
+  const [horsepower, setHorsepower] = useState<number | null>(null)
+
+  const calculateHP = () => {
+    const P = parseFloat(pressure)
+    const Q = parseFloat(flowRate)
+
+    if (!isNaN(P) && !isNaN(Q)) {
+      const result = (P * Q) / 1714 // แรงม้า = (PSI x GPM) / 1714
+      setHorsepower(parseFloat(result.toFixed(2)))
+    } else {
+      setHorsepower(null)
+    }
+  }
 
   return (
     <div>
@@ -48,83 +64,216 @@ export default function MachineDetailPage() {
                 </nav>
             </div>
         </header>
-        <section className="py-20 px-6 bg-white min-h-screen" ref={ref}>
-            
+
+       <section className="max-w-6xl mx-auto px-4 py-16">
+            {/* หัวข้อหลัก */}
+            <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className="text-center mb-10"
+            >
+                <h2 className="text-3xl font-bold text-gray-900 mb-2">
+                ปั๊มและคอมเพรสเซอร์
+                </h2>
+                <p className="text-gray-600 max-w-2xl mx-auto">
+                ระบบสูบและอัดของเหลวและก๊าซที่ใช้กันอย่างแพร่หลายในอุตสาหกรรม เช่น ระบบไฮดรอลิก, ระบบลม, และระบบระบายความร้อน
+                </p>
+            </motion.div>
+
+            {/* การ์ดหัวข้อย่อย */}
+            <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            >
+                {/* การ์ด 1: ปั๊มแบบแรงเหวี่ยง */}
+                <div className="bg-white shadow rounded-lg overflow-hidden hover:shadow-md transition">
+                <Image
+                    src="/images/pump-centrifugal.jpg"
+                    alt="ปั๊มแรงเหวี่ยง"
+                    width={400}
+                    height={250}
+                    className="w-full h-48 object-cover"
+                />
+                <div className="p-4">
+                    <h3 className="text-lg font-semibold text-sky-700 mb-2">ปั๊มแรงเหวี่ยง (Centrifugal Pump)</h3>
+                    <p className="text-sm text-gray-600">
+                    ใช้ใบพัดในการเร่งของเหลว เหมาะกับการส่งน้ำในระบบหล่อเย็นหรือการชลประทาน
+                    </p>
+                </div>
+                </div>
+
+                {/* การ์ด 2: ปั๊มลูกสูบ */}
+                <div className="bg-white shadow rounded-lg overflow-hidden hover:shadow-md transition">
+                <Image
+                    src="/images/pump-piston.jpg"
+                    alt="ปั๊มลูกสูบ"
+                    width={400}
+                    height={250}
+                    className="w-full h-48 object-cover"
+                />
+                <div className="p-4">
+                    <h3 className="text-lg font-semibold text-sky-700 mb-2">ปั๊มลูกสูบ (Piston Pump)</h3>
+                    <p className="text-sm text-gray-600">
+                    ใช้ลูกสูบในการดูดและส่งของเหลวให้แรงดันสูง นิยมในระบบไฮดรอลิก
+                    </p>
+                </div>
+                </div>
+
+                {/* การ์ด 3: คอมเพรสเซอร์แบบสกรู */}
+                <div className="bg-white shadow rounded-lg overflow-hidden hover:shadow-md transition">
+                <Image
+                    src="/images/compressor-screw.jpg"
+                    alt="คอมเพรสเซอร์แบบสกรู"
+                    width={400}
+                    height={250}
+                    className="w-full h-48 object-cover"
+                />
+                <div className="p-4">
+                    <h3 className="text-lg font-semibold text-sky-700 mb-2">คอมเพรสเซอร์แบบสกรู (Screw Compressor)</h3>
+                    <p className="text-sm text-gray-600">
+                    อัดอากาศด้วยโรเตอร์หมุน ใช้ในอุตสาหกรรมที่ต้องการอากาศแรงดันสูงต่อเนื่อง
+                    </p>
+                </div>
+                </div>
+
+                {/* การ์ด 4: คอมเพรสเซอร์แบบลูกสูบ */}
+                <div className="bg-white shadow rounded-lg overflow-hidden hover:shadow-md transition">
+                <Image
+                    src="/images/compressor-piston.jpg"
+                    alt="คอมเพรสเซอร์ลูกสูบ"
+                    width={400}
+                    height={250}
+                    className="w-full h-48 object-cover"
+                />
+                <div className="p-4">
+                    <h3 className="text-lg font-semibold text-sky-700 mb-2">คอมเพรสเซอร์ลูกสูบ (Piston Compressor)</h3>
+                    <p className="text-sm text-gray-600">
+                    ทำงานแบบเดียวกับเครื่องยนต์ ช่วยอัดอากาศเป็นรอบ เหมาะกับงานทั่วไป
+                    </p>
+                </div>
+                </div>
+
+                {/* การ์ด 5: ปั๊มเกียร์ */}
+                <div className="bg-white shadow rounded-lg overflow-hidden hover:shadow-md transition">
+                <Image
+                    src="/images/pump-gear.jpg"
+                    alt="ปั๊มเกียร์"
+                    width={400}
+                    height={250}
+                    className="w-full h-48 object-cover"
+                />
+                <div className="p-4">
+                    <h3 className="text-lg font-semibold text-sky-700 mb-2">ปั๊มเกียร์ (Gear Pump)</h3>
+                    <p className="text-sm text-gray-600">
+                    ใช้เฟืองหมุนดูดของเหลว เหมาะกับการส่งน้ำมันหรือของเหลวหนืด
+                    </p>
+                </div>
+                </div>
+
+                {/* การ์ด 6: คอมเพรสเซอร์แบบแรงเหวี่ยง */}
+                <div className="bg-white shadow rounded-lg overflow-hidden hover:shadow-md transition">
+                <Image
+                    src="/images/compressor-centrifugal.jpg"
+                    alt="คอมเพรสเซอร์แรงเหวี่ยง"
+                    width={400}
+                    height={250}
+                    className="w-full h-48 object-cover"
+                />
+                <div className="p-4">
+                    <h3 className="text-lg font-semibold text-sky-700 mb-2">คอมเพรสเซอร์แรงเหวี่ยง</h3>
+                    <p className="text-sm text-gray-600">
+                    ใช้แรงเหวี่ยงหนีศูนย์กลางเร่งก๊าซให้มีความเร็วและแรงดันสูง
+                    </p>
+                </div>
+                </div>
+            </motion.div>
+        </section>
+
+        <section className="max-w-4xl mx-auto px-4 py-16">
+            <div className="text-center mb-10">
+                <h2 className="text-2xl font-bold text-gray-900">🔧 คำนวณแรงม้า (HP)</h2>
+                <p className="text-gray-600">กรอกแรงดัน (psi) และอัตราการไหล (GPM)</p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+                {/* 🎛 แบบฟอร์มคำนวณ */}
+                <div className="bg-white shadow rounded-lg p-6 space-y-4">
+                <div>
+                    <label className="block text-sm font-medium text-gray-700">แรงดัน (PSI)</label>
+                    <input
+                    type="number"
+                    value={pressure}
+                    onChange={(e) => setPressure(e.target.value)}
+                    className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-sky-500"
+                    placeholder="เช่น 1000"
+                    />
+                </div>
+                <div>
+                    <label className="block text-sm font-medium text-gray-700">อัตราการไหล (GPM)</label>
+                    <input
+                    type="number"
+                    value={flowRate}
+                    onChange={(e) => setFlowRate(e.target.value)}
+                    className="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-sky-500"
+                    placeholder="เช่น 10"
+                    />
+                </div>
+                <button
+                    onClick={calculateHP}
+                    className="bg-sky-600 text-white px-4 py-2 rounded hover:bg-sky-700 transition"
+                >
+                    คำนวณแรงม้า
+                </button>
+                {horsepower !== null && (
+                    <div className="text-lg font-semibold text-green-700">
+                    แรงม้า ≈ {horsepower} HP
+                    </div>
+                )}
+                </div>
+
+                {/* 🌀 SVG Animation */}
+                <motion.div
+                initial={{ rotate: 0 }}
+                animate={{ rotate: 360 }}
+                transition={{ repeat: Infinity, duration: 4, ease: 'linear' }}
+                className="flex justify-center"
+                >
+                <svg width="180" height="180" viewBox="0 0 100 100">
+                    <circle
+                    cx="50"
+                    cy="50"
+                    r="40"
+                    stroke="#0ea5e9"
+                    strokeWidth="10"
+                    fill="none"
+                    strokeDasharray="251.2"
+                    strokeDashoffset="0"
+                    strokeLinecap="round"
+                    />
+                    <circle
+                    cx="50"
+                    cy="50"
+                    r="5"
+                    fill="#0ea5e9"
+                    />
+                </svg>
+                </motion.div>
+            </div>
+        </section>
+
+         
         {/* 🔙 ปุ่มย้อนกลับ */}
-        <div className="max-w-6xl mx-auto mb-6">
+        <div className="max-w-6xl mx-auto mb-12">
             <Button variant="outline" onClick={() => router.back()}>
             ⬅️ ย้อนกลับ
             </Button>
         </div>
 
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-            {/* 🖼️ รูปภาพ */}
-            <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            >
-            <Image
-                src="/images/gear.jpg"
-                alt="Gears"
-                width={500}
-                height={500}
-                className="rounded-lg mx-auto"
-            />
-            </motion.div>
-
-            {/* ✨ ข้อมูลรายละเอียด */}
-            <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="space-y-6"
-            >
-            <h2 className="text-4xl font-bold text-purple-700">เครื่องจักรกลการผลิต</h2>
-            <p className="text-gray-600 text-lg">
-                รายละเอียดเกี่ยวกับเครื่องกลึง เครื่องมิลลิ่ง และ CNC
-            </p>
-
-            {/* 🔧 ประเภทเครื่องจักร */}
-            <div>
-                <h3 className="text-2xl font-semibold text-gray-800 mb-2">ประเภทเครื่องจักร:</h3>
-                <ul className="space-y-1 text-gray-700">
-                <li className="flex items-center">
-                    <CheckCircle className="text-green-600 w-5 h-5 mr-2" />
-                    เครื่องกลึงความเร็วสูง
-                </li>
-                <li className="flex items-center">
-                    <CheckCircle className="text-green-600 w-5 h-5 mr-2" />
-                    เครื่องมิลลิ่งควบคุมด้วยคอมพิวเตอร์
-                </li>
-                <li className="flex items-center">
-                    <CheckCircle className="text-green-600 w-5 h-5 mr-2" />
-                    เครื่อง CNC แบบ 3 แกน
-                </li>
-                </ul>
-            </div>
-
-            {/* 🌟 ฟีเจอร์หลัก */}
-            <div>
-                <h3 className="text-2xl font-semibold text-gray-800 mb-2">ฟีเจอร์หลัก:</h3>
-                <ul className="space-y-1 text-gray-700">
-                <li className="flex items-center">
-                    <CheckCircle className="text-green-600 w-5 h-5 mr-2" />
-                    ความแม่นยำสูงระดับไมครอน
-                </li>
-                <li className="flex items-center">
-                    <CheckCircle className="text-green-600 w-5 h-5 mr-2" />
-                    รองรับวัสดุหลายประเภท เช่น โลหะ พลาสติก
-                </li>
-                <li className="flex items-center">
-                    <CheckCircle className="text-green-600 w-5 h-5 mr-2" />
-                    มีระบบควบคุมอัตโนมัติผ่านหน้าจอสัมผัส
-                </li>
-                </ul>
-            </div>
-            </motion.div>
-        </div>
-        </section>
         {/* 👉 Footer */}
         <footer className="bg-gray-900 text-white py-12 mt-20">
         <div className="container mx-auto px-4">

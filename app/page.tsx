@@ -33,6 +33,56 @@ const applications = [
   { title: "", src: "/images/control_systems.jpg" },
   { title: "", src: "/images/heat_transfer.jpg" }, // สามารถใส่สีพื้นแทนภาพ
 ];
+
+ const machanics = [
+  {
+    id: "gear",
+    title: "ระบบเฟือง (Gear Systems)",  
+    summary: "การออกแบบและคำนวณระบบเฟืองสำหรับการส่งกำลัง",
+    image: "/images/gear.jpg",
+    href: "/gear",
+  },
+  {
+    id: "pump",
+    title: "กลไกลิงค์ (Linkage Mechanisms)",  
+    summary: "การวิเคราะห์และออกแบบกลไกแบบต่างๆ",
+    image: "/images/pump.jpg",
+    href: "/pump",
+  },
+  {
+    id: "belt",
+    title: "ระบบสายพาน (Belt & Chain Systems)",  
+    summary: "การส่งกำลังด้วยสายพานและโซ่",
+    image: "/images/belt.jpg",
+    href: "/belt",
+  }
+  
+  ];
+
+  const autos = [
+  {
+    id: "plc",
+    title: "ระบบควบคุมด้วย PLC",  
+    summary: "PLC (Programmable Logic Controller) เป็นคอมพิวเตอร์ขนาดเล็กที่ใช้ควบคุมกระบวนการต่างๆ ในโรงงานอุตสาหกรรม",
+    image: "/images/plc.jpg",
+    href: "/plc",
+  },
+  {
+    id: "iot",
+    title: "ระบบ IoT ในอุตสาหกรรม",  
+    summary: "IoT (Internet of Things) คือการเชื่อมต่ออุปกรณ์ต่างๆ",
+    image: "/images/iot.jpg",
+    href: "/iot",
+  },
+  {
+    id: "robot",
+    title: "หุ่นยนต์ในสายการผลิต",  
+    summary: "Robotics (หุ่นยนต์) เป็นเทคโนโลยีที่ใช้ในการทำงานอัตโนมัติ",
+    image: "/images/robot.jpg",
+    href: "/robot",
+  }
+  
+  ];
   
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
@@ -168,9 +218,9 @@ const applications = [
         </div>
       </section>
 
-      {/* กลไก */}
-      <section id="mechanics" className="py-20 px-4 bg-white">
-        <div className="container mx-auto">
+      {/* กลไก */} 
+      <section id="machanic" className="bg-white py-16">
+        <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <Badge className="mb-4 bg-green-100 text-green-800">กลไก (Mechanics)</Badge>
             <h3 className="text-4xl font-bold text-gray-900 mb-4">ระบบกลไกและการส่งกำลัง</h3>
@@ -178,58 +228,32 @@ const applications = [
               ศึกษาเกี่ยวกับกลไกต่างๆ การส่งผ่านกำลัง และการออกแบบระบบเครื่องกล
             </p>
           </div>
-
-          <div className="flex flex-col gap-12 items-center"> 
-            <div className="flex flex-wrap justify-center gap-6 max-w-5xl mx-auto mb-10">
-              <div className="flex items-start space-x-4 w-[300px]">
-                <div className="bg-green-100 p-3 rounded-lg">
-                  <Cog className="h-6 w-6 text-green-600" />
-                </div>
-                <div>
-                  <h4 className="text-xl font-semibold mb-2">ระบบเฟือง (Gear Systems)</h4>
-                  <p className="text-gray-600">การออกแบบและคำนวณระบบเฟืองสำหรับการส่งกำลัง</p>
-                  <Image 
-                    src="/images/gear.jpg"
-                    alt='gear'
-                    width={800}
-                    height={600}
-                    className="mt-4"
-                  />
-                </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            {machanics.map((machanic, index) => (
+              <div
+                key={index}
+                className="bg-gray-100 rounded-lg overflow-hidden shadow hover:shadow-md transition"
+              >
+                <img
+                  src={machanic.image}
+                  alt={machanic.title}
+                  className="w-full h-48 object-cover"
+                />
+                <div className="p-4">
+                  <h3 className="text-lg font-semibold text-gray-700 mb-2">
+                    {machanic.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm">{machanic.summary}</p>
+                </div> 
+                    <div className="text-center mb-4">
+                      <Link key={machanic.id} href={machanic.href}>
+                        <span className="text-sm text-blue-600 font-medium hover:text-blue-800 cursor-pointer">
+                          เรียนรู้เพิ่มเติม →
+                        </span>
+                      </Link>
+                    </div>
               </div>
-              <div className="flex items-start space-x-4 w-[300px]">
-                <div className="bg-green-100 p-3 rounded-lg">
-                  <Settings className="h-6 w-6 text-green-600" />
-                </div>
-                <div>
-                  <h4 className="text-xl font-semibold mb-2">กลไกลิงค์ (Linkage Mechanisms)</h4>
-                  <p className="text-gray-600">การวิเคราะห์และออกแบบกลไกแบบต่างๆ</p>
-                  <Image 
-                    src="/images/pump.jpg"
-                    alt='linkate'
-                    width={450}
-                    height={450}
-                    className="mt-4"
-                  />
-                </div>
-              </div>
-              <div className="flex items-start space-x-4 w-[300px]">
-                <div className="bg-green-100 p-3 rounded-lg">
-                  <Wrench className="h-6 w-6 text-green-600" />
-                </div>
-                <div>
-                  <h4 className="text-xl font-semibold mb-2">ระบบสายพาน (Belt & Chain Systems)</h4>
-                  <p className="text-gray-600">การส่งกำลังด้วยสายพานและโซ่</p>
-                  <Image 
-                    src="/images/belt.jpg"
-                    alt='กลไก'
-                    width={650}
-                    height={650}
-                    className="mt-10"
-                  />
-                </div>
-              </div>
-            </div> 
+            ))}
           </div>
         </div>
       </section>
@@ -348,64 +372,41 @@ const applications = [
       </section>
 
       {/* ระบบอัตโนมัติ */}
-      <section id="automation" className="py-20 px-4">
-        <div className="container mx-auto">
+      <section id="auto" className="bg-white py-16">
+        <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <Badge className="mb-4 bg-orange-100 text-orange-800">ระบบอัตโนมัติ (Automation)</Badge>
+            <Badge className="mb-4 bg-green-100 text-green-800">ระบบอัตโนมัติ (Automation)</Badge>
             <h3 className="text-4xl font-bold text-gray-900 mb-4">ระบบควบคุมอัตโนมัติ</h3>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               เรียนรู้เกี่ยวกับระบบควบคุม PLC โรโบติกส์ และ IoT ในอุตสาหกรรม
             </p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div className="space-y-8">
-              <div className="flex items-start space-x-4">
-                <div className="bg-orange-100 p-3 rounded-lg flex-shrink-0">
-                  <Cpu className="h-6 w-6 text-orange-600" />
-                </div>
-                <div>
-                  <h4 className="text-xl font-semibold mb-2">PLC และ SCADA</h4>
-                  <p className="text-gray-600">ระบบควบคุมแบบโปรแกรมได้และการตรวจสอบ</p>
-                </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            {autos.map((auto, index) => (
+              <div
+                key={index}
+                className="bg-gray-100 rounded-lg overflow-hidden shadow hover:shadow-md transition"
+              >
+                <img
+                  src={auto.image}
+                  alt={auto.title}
+                  className="w-full h-48 object-cover"
+                />
+                <div className="p-4">
+                  <h3 className="text-lg font-semibold text-gray-700 mb-2">
+                    {auto.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm">{auto.summary}</p>
+                </div> 
+                    <div className="text-center mb-4">
+                      <Link key={auto.id} href={auto.href}>
+                        <span className="text-sm text-blue-600 font-medium hover:text-blue-800 cursor-pointer">
+                          เรียนรู้เพิ่มเติม →
+                        </span>
+                      </Link>
+                    </div>
               </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="bg-orange-100 p-3 rounded-lg flex-shrink-0">
-                  <Settings className="h-6 w-6 text-orange-600" />
-                </div>
-                <div>
-                  <h4 className="text-xl font-semibold mb-2">โรโบติกส์อุตสาหกรรม</h4>
-                  <p className="text-gray-600">หุ่นยนต์สำหรับการผลิตและประกอบ</p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="bg-orange-100 p-3 rounded-lg flex-shrink-0">
-                  <Zap className="h-6 w-6 text-orange-600" />
-                </div>
-                <div>
-                  <h4 className="text-xl font-semibold mb-2">IoT และ Industry 4.0</h4>
-                  <p className="text-gray-600">อินเทอร์เน็ตของสิ่งของและโรงงานอัจฉริยะ</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-gradient-to-br from-orange-50 to-orange-100 p-8 rounded-lg">
-              <h4 className="text-2xl font-bold text-gray-900 mb-4">หลักสูตรแนะนำ</h4>
-              <div className="space-y-4">
-                <div className="bg-white p-4 rounded-lg shadow-sm">
-                  <h5 className="font-semibold text-gray-900">พื้นฐาน PLC Programming</h5>
-                  <p className="text-sm text-gray-600 mt-1">เรียนรู้การเขียนโปรแกรม PLC เบื้องต้น</p>
-                  <Badge className="mt-2 bg-green-100 text-green-800">เริ่มต้น</Badge>
-                </div>
-                <div className="bg-white p-4 rounded-lg shadow-sm">
-                  <h5 className="font-semibold text-gray-900">ระบบควบคุมขั้นสูง</h5>
-                  <p className="text-sm text-gray-600 mt-1">การออกแบบระบบควบคุมที่ซับซ้อน</p>
-                  <Badge className="mt-2 bg-orange-100 text-orange-800">ขั้นสูง</Badge>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
