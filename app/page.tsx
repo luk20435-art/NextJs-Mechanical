@@ -126,7 +126,7 @@ const applications = [
             loop
             playsInline
           >
-            <source src="/videos/video_1.MOV" type="video/mp4" />
+            <source src="/videos/video_1.mov" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
@@ -344,7 +344,7 @@ const applications = [
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
               <video width="100%" height="auto"  autoPlay muted loop playsInline>
-                <source src="/videos/technology.MOV" type="video/mp4" />
+                <source src="/videos/technology.mov" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             </div>
