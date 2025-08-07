@@ -59,7 +59,7 @@ export default function MachineDetailPage() {
                 IoT (Internet of Things) คือการเชื่อมต่ออุปกรณ์ต่างๆ ผ่านอินเทอร์เน็ต เพื่อควบคุม ตรวจสอบ และวิเคราะห์ข้อมูลในโรงงานอุตสาหกรรม
                 </p>
                 <Image
-                src="/images/bevel.jpg"
+                src="/images/iot-utasahakam.jpg"
                 alt="IoT Industrial"
                 width={800}
                 height={400}
@@ -78,7 +78,7 @@ export default function MachineDetailPage() {
                     <p className="text-gray-600 text-sm">
                     ตรวจวัดค่าต่างๆ เช่น อุณหภูมิ, ความชื้น, ความดัน และส่งข้อมูลเข้าสู่ระบบ
                     </p>
-                    <Image src="/images/bevel.jpg" alt="Sensor" width={300} height={200} className="mt-4 rounded-md" />
+                    <Image src="/images/sensor.jpg" alt="Sensor" width={300} height={200} className="mt-4 rounded-md" />
                 </div>
 
                 {/* Card 2 */}
@@ -88,7 +88,7 @@ export default function MachineDetailPage() {
                     <p className="text-gray-600 text-sm">
                     การเชื่อมต่อผ่าน Wi-Fi, Ethernet, 4G/5G เพื่อส่งข้อมูลจากอุปกรณ์สู่คลาวด์หรือเซิร์ฟเวอร์
                     </p>
-                    <Image src="/images/bevel.jpg" alt="Connectivity" width={300} height={200} className="mt-4 rounded-md" />
+                    <Image src="/images/connectivity.jpg" alt="Connectivity" width={300} height={200} className="mt-4 rounded-md" />
                 </div>
 
                 {/* Card 3 */}
@@ -98,7 +98,7 @@ export default function MachineDetailPage() {
                     <p className="text-gray-600 text-sm">
                     การประมวลผล วิเคราะห์ข้อมูล และแสดงผลผ่านแดชบอร์ดเพื่อช่วยในการตัดสินใจ
                     </p>
-                    <Image src="/images/bevel.jpg" alt="Dashboard" width={300} height={200} className="mt-4 rounded-md" />
+                    <Image src="/images/data.jpg" alt="Dashboard" width={300} height={200} className="mt-4 rounded-md" />
                 </div>
                 </div>
             </section>

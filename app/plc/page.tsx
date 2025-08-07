@@ -65,7 +65,7 @@ export default function MachineDetailPage() {
 
                 <div className="mt-8">
                 <Image
-                    src="/images/plc/plc-system.jpg"
+                    src="/images/plc_system.jpg"
                     alt="PLC system"
                     width={800}
                     height={400}
@@ -83,7 +83,7 @@ export default function MachineDetailPage() {
                 <h2 className="text-2xl font-bold text-gray-800 mb-6">⚙️ หลักการทำงานของ PLC</h2>
                 <div className="grid md:grid-cols-2 gap-8 items-center">
                 <Image
-                    src="/images/plc/plc-working.png"
+                    src="/images/plc-working.png"
                     alt="PLC working"
                     width={500}
                     height={300}
@@ -108,15 +108,15 @@ export default function MachineDetailPage() {
                 {[
                     {
                     title: 'ควบคุมสายพานลำเลียง',
-                    img: '/images/plc/conveyor.jpg',
+                    img: '/images/conveyor.jpg',
                     },
                     {
                     title: 'ควบคุมหุ่นยนต์หยิบวัตถุ',
-                    img: '/images/plc/robotic-arm.jpg',
+                    img: '/images/robotic-arm.jpg',
                     },
                     {
                     title: 'ควบคุมระบบบรรจุภัณฑ์',
-                    img: '/images/plc/packaging.jpg',
+                    img: '/images/packaging.jpg',
                     },
                 ].map((item, i) => (
                     <div key={i} className="bg-white rounded-xl shadow-md p-4 hover:shadow-xl transition">
@@ -142,7 +142,7 @@ export default function MachineDetailPage() {
                 <h2 className="text-2xl font-bold text-gray-800 mb-4">💻 ตัวอย่างโปรแกรม PLC (Ladder Diagram)</h2>
                 <div className="bg-gray-100 p-4 rounded-md shadow-md overflow-x-auto">
                 <Image
-                    src="/images/plc/ladder-example.png"
+                    src="/images/ladder-example.jpg"
                     alt="Ladder Diagram"
                     width={800}
                     height={300}
