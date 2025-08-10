@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button"; 
 import { Cog } from "lucide-react";
 import Link from "next/link";
+import { Separator } from "@radix-ui/react-separator";
 
 
 export default function MachineDetailPage() {
@@ -191,62 +192,97 @@ export default function MachineDetailPage() {
 
         
         {/* 👉 Footer */}
-        <footer className="bg-gray-900 text-white py-12 mt-20">
+        <footer className="bg-gray-900 text-white py-12">
         <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            
-            {/* เกี่ยวกับ */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
-                <div className="flex items-center space-x-2 mb-4">
+              <div className="flex items-center space-x-2 mb-4">
                 <Cog className="h-6 w-6 text-blue-400" />
-                <h4 className="text-xl font-bold">AutoMechLab</h4>
-                </div>
-                <p className="text-gray-400">
-                แหล่งเรียนรู้ด้านวิศวกรรมเครื่องกล ครอบคลุมเนื้อหาและเทคโนโลยีสมัยใหม่
-                </p>
+                <h4 className="text-xl font-bold">MechEng Hub</h4>
+              </div>
+              <p className="text-gray-400">ศูนย์รวมความรู้ด้านวิศวกรรมเครื่องกลที่ครอบคลุมและทันสมัย</p>
             </div>
 
-            {/* ลิงก์เมนู */}
             <div>
-                <h5 className="font-semibold mb-4">หัวข้อเรียน</h5>
-                <ul className="space-y-2 text-gray-400">
-                <li><Link href="#force" className="hover:text-white transition">แรง</Link></li>
-                <li><Link href="#mechanics" className="hover:text-white transition">กลไก</Link></li>
-                <li><Link href="#machines" className="hover:text-white transition">เครื่องจักร</Link></li>
-                <li><Link href="#automotive" className="hover:text-white transition">ยานยนต์</Link></li>
-                <li><Link href="#automation" className="hover:text-white transition">ระบบอัตโนมัติ</Link></li>
-                </ul>
+              <h5 className="font-semibold mb-4">หัวข้อเรียน</h5>
+              <ul className="space-y-2 text-gray-400">
+                <li>
+                  <Link href="#force" className="hover:text-white transition-colors">
+                    แรง
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#mechanics" className="hover:text-white transition-colors">
+                    กลไก
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#machines" className="hover:text-white transition-colors">
+                    เครื่องจักร
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#automotive" className="hover:text-white transition-colors">
+                    ยานยนต์
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#automotive" className="hover:text-white transition-colors">
+                    ระบบควบคุมด้วย
+                  </Link>
+                </li> 
+              </ul>
             </div>
 
-            {/* ทรัพยากร */}
             <div>
-                <h5 className="font-semibold mb-4">ทรัพยากร</h5>
-                <ul className="space-y-2 text-gray-400">
-                <li><Link href="#" className="hover:text-white transition">บทเรียน</Link></li>
-                <li><Link href="#" className="hover:text-white transition">แบบฝึกหัด</Link></li>
-                <li><Link href="#" className="hover:text-white transition">เครื่องมือคำนวณ</Link></li>
-                <li><Link href="#" className="hover:text-white transition">ชุมชน</Link></li>
-                </ul>
+              <h5 className="font-semibold mb-4">ทรัพยากร</h5>
+              <ul className="space-y-2 text-gray-400">
+                <li>
+                  <Link href="#" className="hover:text-white transition-colors">
+                    บทเรียน
+                  </Link>
+                </li> 
+                <li>
+                  <Link href="#" className="hover:text-white transition-colors">
+                    เครื่องมือคำนวณ
+                  </Link>
+                </li>
+                <li>
+                  <Link href="#" className="hover:text-white transition-colors">
+                    ชุมชน
+                  </Link>
+                </li>
+              </ul>
             </div>
 
-            {/* ติดต่อเรา */}
             <div>
-                <h5 className="font-semibold mb-4">ติดต่อเรา</h5>
-                <ul className="space-y-2 text-gray-400">
-                <li>อีเมล: info@mechenghub.com</li>
-                <li>โทร: 02-xxx-xxxx</li>
-                <li>Facebook: MechEngHub</li>
-                <li>Line: @mechenghub</li>
-                </ul>
+              <h5 className="font-semibold mb-4">ติดต่อเรา</h5>
+              <ul className="space-y-2 text-gray-400">
+                <li>อีเมล: santawisuk511@gmail.com
+                          <p className="ml-10">: Chaiyapol210151@gmail.com</p>
+                          <p className="ml-10">: bigccubon1256@gmail.com</p>
+                </li>
+                <li>Facebook : Sutthawat santawisuk
+                          <p className="ml-10">: Chaiyapol Mingkhwan</p>
+                          <p className="ml-10">: Natthaphat Chanloet</p>
+                </li>
+                <li>Line : santawisuk2550
+                          <p className="ml-10">: Chaiyapol2551</p>
+                          <p className="ml-10">: cckomiauto</p>
+                </li>
+                <li>โทร: 0821318166</li> 
+                <li>ที่อยู่: อุบลราชธานี</li>
+              </ul>
             </div>
-            </div>
+          </div>
 
-            {/* เส้นแบ่ง & ลิขสิทธิ์ */}
-            <div className="border-t border-gray-700 mt-8 pt-4 text-center text-sm text-gray-500">
-            &copy; 2024 AutoMechLab. สงวนลิขสิทธิ์
-            </div>
+          <Separator className="my-8 bg-gray-700" />
+
+          <div className="text-center text-gray-400">
+            <p>&copy; 2024 MechEng Hub. สงวนลิขสิทธิ์ทุกประการ</p>
+          </div>
         </div>
-        </footer>
+      </footer>
     </div>
   );
 }

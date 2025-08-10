@@ -489,6 +489,11 @@ const applications = [
                     ยานยนต์
                   </Link>
                 </li>
+                <li>
+                  <Link href="#automotive" className="hover:text-white transition-colors">
+                    ระบบควบคุมด้วย
+                  </Link>
+                </li> 
               </ul>
             </div>
 
@@ -499,12 +504,7 @@ const applications = [
                   <Link href="#" className="hover:text-white transition-colors">
                     บทเรียน
                   </Link>
-                </li>
-                <li>
-                  <Link href="#" className="hover:text-white transition-colors">
-                    แบบฝึกหัด
-                  </Link>
-                </li>
+                </li> 
                 <li>
                   <Link href="#" className="hover:text-white transition-colors">
                     เครื่องมือคำนวณ
@@ -521,10 +521,20 @@ const applications = [
             <div>
               <h5 className="font-semibold mb-4">ติดต่อเรา</h5>
               <ul className="space-y-2 text-gray-400">
-                <li>อีเมล: info@mechenghub.com</li>
-                <li>โทร: 02-xxx-xxxx</li>
-                <li>Facebook: MechEngHub</li>
-                <li>Line: @mechenghub</li>
+                <li>อีเมล: santawisuk511@gmail.com
+                          <p className="ml-10">: Chaiyapol210151@gmail.com</p>
+                          <p className="ml-10">: bigccubon1256@gmail.com</p>
+                </li>
+                <li>Facebook : Sutthawat santawisuk
+                          <p className="ml-10">: Chaiyapol Mingkhwan</p>
+                          <p className="ml-10">: Natthaphat Chanloet</p>
+                </li>
+                <li>Line : santawisuk2550
+                          <p className="ml-10">: Chaiyapol2551</p>
+                          <p className="ml-10">: cckomiauto</p>
+                </li>
+                <li>โทร: 0821318166</li> 
+                <li>ที่อยู่: อุบลราชธานี</li>
               </ul>
             </div>
           </div>
